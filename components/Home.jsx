@@ -16,6 +16,9 @@ function Home() {
       .then((data) => {
         console.log("UseEffect triggered from Home(popular)");
         setMostPopular(data.articles[0]);
+        const dataLength = data.articles.length;
+        const randomNumber = Math.random();
+        setRandomArticle(data.articles[Math.floor(randomNumber * dataLength)]);
       });
   }, []);
 
@@ -27,18 +30,6 @@ function Home() {
       .then((data) => {
         console.log("UseEffect triggered from Home(recent)");
         setMostRecent(data.articles[0]);
-      });
-  }, []);
-
-  useEffect(() => {
-    fetch(`https://nc-news-gez5.onrender.com/api/articles`)
-      .then((results) => {
-        return results.json();
-      })
-      .then((data) => {
-        const dataLength = data.articles.length;
-        const randomNumber = Math.random();
-        setRandomArticle(data.articles[Math.floor(randomNumber * dataLength)]);
       });
   }, []);
 
