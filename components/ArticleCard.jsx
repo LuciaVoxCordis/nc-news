@@ -1,7 +1,6 @@
 import { Link } from "react-router";
 
 function ArticleCard({ article }) {
-  console.log(article);
   return (
     <li>
       <h3> {article.title}</h3>
