@@ -14,7 +14,7 @@ function SearchProvider() {
       <Route path="/recent" element={<Recent />} />
       <Route path="/topics" element={<Topics />} />
       <Route path="/article/:article_id" element={<ExpandedArticle />} />
-      <Route path="/topic/:topic_id" element={<ExpandedTopic />} />
+      <Route path="/topic/:topic" element={<ExpandedTopic />} />
     </Routes>
   );
 }
