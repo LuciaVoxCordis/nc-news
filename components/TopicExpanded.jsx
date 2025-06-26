@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import ArticleList from "./ArticleList";
 
-function ExpandedTopic() {
+function TopicExpanded() {
   let topic = useParams()["topic"];
 
   const [articles, setArticles] = useState([]);
@@ -27,4 +27,4 @@ function ExpandedTopic() {
   );
 }
 
-export default ExpandedTopic;
+export default TopicExpanded;

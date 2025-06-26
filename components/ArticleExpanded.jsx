@@ -16,7 +16,6 @@ function ExpandedArticle() {
         return results.json();
       })
       .then((data) => {
-        console.log(data);
         setArticle(data);
       });
   }, [id]);
@@ -31,6 +30,44 @@ function ExpandedArticle() {
         setComments(data.comments);
       });
   }, [id]);
+
+  const increaseVotes = (article_id) => {
+    setArticle({ ...article, votes: votes + 1 });
+    fetch(`https://nc-news-gez5.onrender.com/api/articles/${article_id}`, {
+      method: "PATCH",
+      body: JSON.stringify({ inc_votes: 1 }),
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((results) => {
+        return results.json();
+      })
+      .then((data) => {
+        setArticle(data);
+      })
+      .catch((err) => {
+        console.log(err);
+        setArticle({ ...article });
+      });
+  };
+
+  const decreaseVotes = (article_id) => {
+    setArticle({ ...article, votes: votes - 1 });
+    fetch(`https://nc-news-gez5.onrender.com/api/articles/${article_id}`, {
+      method: "PATCH",
+      body: JSON.stringify({ inc_votes: -1 }),
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((results) => {
+        return results.json();
+      })
+      .then((data) => {
+        setArticle(data);
+      })
+      .catch((err) => {
+        console.log(err);
+        setArticle({ ...article });
+      });
+  };
 
   const {
     article_id,
@@ -52,6 +89,8 @@ function ExpandedArticle() {
       <img src={article_img_url} />
       <p>{body}</p>
       <p>Votes: {votes}</p>
+      <button onClick={() => increaseVotes(article_id)}>+1</button>
+      <button onClick={() => decreaseVotes(article_id)}>-1</button>
       <h3>comments:</h3>
       <CommentList comments={comments} />
     </>
